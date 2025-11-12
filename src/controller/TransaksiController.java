@@ -84,9 +84,8 @@ public class TransaksiController {
         return list;
     }
 
-    /**
-     * Mengupdate data transaksi berdasarkan ID.
-     */
+    // Mengupdate data transaksi berdasarkan ID.
+     
     public boolean updateTransaksi(Transaksi transaksi) {
         if (transaksi.getId() <= 0) {
             JOptionPane.showMessageDialog(null, "ID transaksi tidak valid!", "Error", JOptionPane.WARNING_MESSAGE);
@@ -115,9 +114,7 @@ public class TransaksiController {
         }
     }
 
-    /**
-     * Menghapus transaksi berdasarkan ID.
-     */
+    // Menghapus transaksi berdasarkan ID.
     public boolean hapusTransaksi(int id) {
         if (id <= 0) {
             JOptionPane.showMessageDialog(null, "ID tidak valid!", "Error", JOptionPane.WARNING_MESSAGE);

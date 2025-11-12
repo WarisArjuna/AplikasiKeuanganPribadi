@@ -1,25 +1,20 @@
 package model;
 
 /**
- * Model class untuk menyimpan data kategori transaksi.
- * Bisa digunakan untuk mengelompokkan pemasukan/pengeluaran.
+ * Model untuk tabel kategori.
  */
 public class Kategori {
     private int id;
-    private String nama;
-    private String jenis; // "Pemasukan" atau "Pengeluaran"
+    private String namaKategori;
 
-    // Constructor kosong
     public Kategori() {}
 
-    // Constructor lengkap
-    public Kategori(int id, String nama, String jenis) {
+    public Kategori(int id, String namaKategori) {
         this.id = id;
-        this.nama = nama;
-        this.jenis = jenis;
+        this.namaKategori = namaKategori;
     }
 
-    // Getter dan Setter
+    // Getter & Setter lengkap
     public int getId() {
         return id;
     }
@@ -28,25 +23,16 @@ public class Kategori {
         this.id = id;
     }
 
-    public String getNama() {
-        return nama;
+    public String getNamaKategori() {
+        return namaKategori;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setNamaKategori(String namaKategori) {
+        this.namaKategori = namaKategori;
     }
 
-    public String getJenis() {
-        return jenis;
-    }
-
-    public void setJenis(String jenis) {
-        this.jenis = jenis;
-    }
-
-    // Menampilkan informasi kategori (opsional)
     @Override
     public String toString() {
-        return nama + " (" + jenis + ")";
+        return namaKategori; // Supaya otomatis tampil di JComboBox atau JList
     }
 }
