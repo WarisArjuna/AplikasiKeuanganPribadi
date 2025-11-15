@@ -1,22 +1,82 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
-/**
- *
- * @author WarisArjuna
- */
-public class MainView extends javax.swing.JFrame {
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import controller.SidebarController;
+import util.ButtonStyler;
+import util.ButtonStyler.SidebarColor;
 
-    /**
-     * Creates new form MainView
-     */
+public class MainView extends javax.swing.JFrame {
+    SidebarController sidebar;
+
     public MainView() {
         initComponents();
-    }
+        setLocationRelativeTo(null); 
 
+        sidebar = new SidebarController(pnlContent);
+
+         // daftarkan menu
+        sidebar.addMenu(btnDashboard, "dashboard");
+        sidebar.addMenu(btnKeuangan, "keuangan");
+        sidebar.addMenu(btnPengaturan, "pengaturan");
+
+        // set default tampilan
+        sidebar.setDefault(btnDashboard); 
+        
+        // CARD INCOME
+        cardIncome.putClientProperty("FlatLaf.style", 
+            "background: #D4F6DB; " +
+            "arc:20; " +
+            "border:5,5,5,5;");
+
+        // CARD EXPENSE
+        cardExpense.putClientProperty("FlatLaf.style", 
+            "background: #F8D7DA; " +
+            "arc:20; " +
+            "border:5,5,5,5;");
+
+        // CARD BALANCE
+        cardBalance.putClientProperty("FlatLaf.style", 
+            "background: #D7E9FF; " +
+            "arc:20; " +
+            "border:5,5,5,5;");
+        
+        
+        lblIncomeTitle.putClientProperty("FlatLaf.style", "font: bold +1;");
+        lblIncomeValue.putClientProperty("FlatLaf.style", "font: bold +6;");
+        
+        lblPengeluaranTitle.putClientProperty("FlatLaf.style", "font: bold +1;");
+        lblPengeluaranValue.putClientProperty("FlatLaf.style", "font: bold +6;");
+        
+        lblBalanceTitle.putClientProperty("FlatLaf.style", "font: bold +1;");
+        lblBalanceValue.putClientProperty("FlatLaf.style", "font: bold +6;");
+        
+        btnRefreshDashboard.putClientProperty("FlatLaf.style", "background:#2196F3; foreground:#fff; arc:12;");
+        
+        btnTambahData.putClientProperty("FlatLaf.style", "background:#4CAF50; foreground:#fff; arc:12;");
+        btnRefreshKeuangan.putClientProperty("FlatLaf.style", "background:#2196F3; foreground:#fff; arc:12;");
+
+        ButtonStyler.stylePrimary(btnSimpan);
+        ButtonStyler.styleWarning(btnEdit);
+        ButtonStyler.styleDanger(btnHapus);
+        
+        ButtonStyler.styleSidebar(btnDashboard, SidebarColor.BLUE);
+        ButtonStyler.styleSidebar(btnKeuangan, SidebarColor.PURPLE);
+        ButtonStyler.styleSidebar(btnLaporan, SidebarColor.ORANGE);
+        ButtonStyler.styleSidebar(btnPengaturan, SidebarColor.DARK);
+    };
+
+    public class Main {
+        public static void main(String[] args) {
+            try {
+                FlatMaterialLighterIJTheme.setup();
+            } catch (Exception e) {
+                System.err.println("Gagal load theme: " + e.getMessage());
+            }
+
+            // MUNCULKAN FRAME
+            new view.MainView().setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,57 +86,579 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        pnlSidebar = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 10), new java.awt.Dimension(5, 10), new java.awt.Dimension(5, 10));
+        btnDashboard = new javax.swing.JButton();
+        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5));
+        btnKeuangan = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5));
+        btnLaporan = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5));
+        btnPengaturan = new javax.swing.JButton();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        btnKeluar = new javax.swing.JButton();
+        pnlContent = new javax.swing.JPanel();
+        pnlDashboard = new javax.swing.JPanel();
+        pnlNavbarDashboard = new javax.swing.JPanel();
+        lblDashboardTitle = new javax.swing.JLabel();
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(550, 20), new java.awt.Dimension(32767, 0));
+        btnRefreshDashboard = new javax.swing.JButton();
+        pnlDashboardBody = new javax.swing.JPanel();
+        cardIncome = new javax.swing.JPanel();
+        lblIncomeValue = new javax.swing.JLabel();
+        lblIncomeTitle = new javax.swing.JLabel();
+        cardExpense = new javax.swing.JPanel();
+        lblPengeluaranTitle = new javax.swing.JLabel();
+        lblPengeluaranValue = new javax.swing.JLabel();
+        cardBalance = new javax.swing.JPanel();
+        lblBalanceTitle = new javax.swing.JLabel();
+        lblBalanceValue = new javax.swing.JLabel();
+        pnlKeuangan = new javax.swing.JPanel();
+        pnlNavbarKeuangan = new javax.swing.JPanel();
+        lblKeuanganTitle = new javax.swing.JLabel();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(280, 20), new java.awt.Dimension(32767, 0));
+        btnTambahData = new javax.swing.JButton();
+        btnRefreshKeuangan = new javax.swing.JButton();
+        txtSearchbar = new javax.swing.JTextField();
+        pnlKeuanganBody = new javax.swing.JPanel();
+        pnlTambahData = new javax.swing.JPanel();
+        lblTanggal = new javax.swing.JLabel();
+        dateTanggal = new com.toedter.calendar.JDateChooser();
+        lblJenis = new javax.swing.JLabel();
+        cmbJenis = new javax.swing.JComboBox<>();
+        lblKeterangan = new javax.swing.JLabel();
+        txtKeterangan = new javax.swing.JTextField();
+        lblJumlah = new javax.swing.JLabel();
+        txtJumlah = new javax.swing.JTextField();
+        pnlButtonCRUD = new javax.swing.JPanel();
+        btnSimpan = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
+        pnlTable = new javax.swing.JPanel();
+        scrollpaneTabel = new javax.swing.JScrollPane();
+        tableTransaksi = new javax.swing.JTable();
+        pnlToolbar = new javax.swing.JPanel();
+        btnExport = new javax.swing.JButton();
+        btnImport = new javax.swing.JButton();
+        pnlStatus = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        pnlLaporan = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JejakFinan");
+        setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
+        setMaximumSize(new java.awt.Dimension(1000, 650));
+        setMinimumSize(new java.awt.Dimension(1000, 650));
+        setSize(new java.awt.Dimension(1000, 650));
+
+        pnlSidebar.setBackground(new java.awt.Color(31, 31, 31));
+        pnlSidebar.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        pnlSidebar.setMaximumSize(new java.awt.Dimension(200, 650));
+        pnlSidebar.setMinimumSize(new java.awt.Dimension(200, 650));
+        pnlSidebar.setPreferredSize(new java.awt.Dimension(200, 650));
+        pnlSidebar.setLayout(new javax.swing.BoxLayout(pnlSidebar, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("KeuanganKu");
+        pnlSidebar.add(jLabel1);
+        pnlSidebar.add(filler1);
+
+        btnDashboard.setBackground(new java.awt.Color(8, 57, 110));
+        btnDashboard.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnDashboard.setForeground(java.awt.Color.white);
+        btnDashboard.setText("Dashboard");
+        btnDashboard.setBorderPainted(false);
+        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDashboard.setFocusPainted(false);
+        btnDashboard.setIconTextGap(15);
+        btnDashboard.setMaximumSize(new java.awt.Dimension(180, 40));
+        btnDashboard.setMinimumSize(new java.awt.Dimension(180, 40));
+        btnDashboard.setPreferredSize(new java.awt.Dimension(180, 40));
+        btnDashboard.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/dashboard.png"))); // NOI18N
+        pnlSidebar.add(btnDashboard);
+        pnlSidebar.add(filler5);
+
+        btnKeuangan.setBackground(new java.awt.Color(55, 75, 95));
+        btnKeuangan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnKeuangan.setForeground(java.awt.Color.white);
+        btnKeuangan.setText("Keuangan");
+        btnKeuangan.setBorderPainted(false);
+        btnKeuangan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnKeuangan.setFocusPainted(false);
+        btnKeuangan.setMaximumSize(new java.awt.Dimension(180, 40));
+        btnKeuangan.setMinimumSize(new java.awt.Dimension(180, 40));
+        btnKeuangan.setPreferredSize(new java.awt.Dimension(180, 40));
+        btnKeuangan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeuanganActionPerformed(evt);
+            }
+        });
+        pnlSidebar.add(btnKeuangan);
+        pnlSidebar.add(filler3);
+
+        btnLaporan.setBackground(new java.awt.Color(82, 60, 120));
+        btnLaporan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnLaporan.setForeground(java.awt.Color.white);
+        btnLaporan.setText("Laporan");
+        btnLaporan.setBorderPainted(false);
+        btnLaporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLaporan.setFocusPainted(false);
+        btnLaporan.setMaximumSize(new java.awt.Dimension(180, 40));
+        btnLaporan.setMinimumSize(new java.awt.Dimension(180, 40));
+        btnLaporan.setPreferredSize(new java.awt.Dimension(180, 40));
+        pnlSidebar.add(btnLaporan);
+        pnlSidebar.add(filler2);
+
+        btnPengaturan.setBackground(new java.awt.Color(97, 97, 97));
+        btnPengaturan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnPengaturan.setForeground(java.awt.Color.white);
+        btnPengaturan.setText("Pengaturan");
+        btnPengaturan.setBorderPainted(false);
+        btnPengaturan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPengaturan.setFocusPainted(false);
+        btnPengaturan.setMaximumSize(new java.awt.Dimension(180, 40));
+        btnPengaturan.setMinimumSize(new java.awt.Dimension(180, 40));
+        btnPengaturan.setPreferredSize(new java.awt.Dimension(180, 40));
+        pnlSidebar.add(btnPengaturan);
+        pnlSidebar.add(filler6);
+
+        btnKeluar.setBackground(new java.awt.Color(198, 40, 40));
+        btnKeluar.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btnKeluar.setForeground(java.awt.Color.white);
+        btnKeluar.setText("Keluar");
+        btnKeluar.setBorderPainted(false);
+        btnKeluar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnKeluar.setFocusPainted(false);
+        btnKeluar.setMaximumSize(new java.awt.Dimension(180, 40));
+        btnKeluar.setMinimumSize(new java.awt.Dimension(180, 40));
+        btnKeluar.setPreferredSize(new java.awt.Dimension(180, 40));
+        pnlSidebar.add(btnKeluar);
+
+        getContentPane().add(pnlSidebar, java.awt.BorderLayout.WEST);
+
+        pnlContent.setBackground(new java.awt.Color(245, 245, 245));
+        pnlContent.setMaximumSize(new java.awt.Dimension(780, 650));
+        pnlContent.setMinimumSize(new java.awt.Dimension(780, 650));
+        pnlContent.setPreferredSize(new java.awt.Dimension(780, 650));
+        pnlContent.setLayout(new java.awt.CardLayout());
+
+        pnlDashboard.setBackground(new java.awt.Color(230, 230, 230));
+        pnlDashboard.setLayout(new java.awt.BorderLayout());
+
+        pnlNavbarDashboard.setBackground(new java.awt.Color(230, 230, 230));
+        pnlNavbarDashboard.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 1, 1, 1));
+        pnlNavbarDashboard.setMaximumSize(new java.awt.Dimension(780, 60));
+        pnlNavbarDashboard.setMinimumSize(new java.awt.Dimension(780, 60));
+        pnlNavbarDashboard.setPreferredSize(new java.awt.Dimension(780, 60));
+        pnlNavbarDashboard.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lblDashboardTitle.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblDashboardTitle.setForeground(new java.awt.Color(51, 51, 51));
+        lblDashboardTitle.setText("Dashboard");
+        pnlNavbarDashboard.add(lblDashboardTitle);
+        pnlNavbarDashboard.add(filler7);
+
+        btnRefreshDashboard.setBackground(new java.awt.Color(229, 229, 229));
+        btnRefreshDashboard.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRefreshDashboard.setForeground(new java.awt.Color(102, 102, 102));
+        btnRefreshDashboard.setText("Refresh");
+        btnRefreshDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefreshDashboard.setMaximumSize(new java.awt.Dimension(90, 35));
+        btnRefreshDashboard.setMinimumSize(new java.awt.Dimension(90, 35));
+        btnRefreshDashboard.setPreferredSize(new java.awt.Dimension(90, 35));
+        btnRefreshDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshDashboardActionPerformed(evt);
+            }
+        });
+        pnlNavbarDashboard.add(btnRefreshDashboard);
+
+        pnlDashboard.add(pnlNavbarDashboard, java.awt.BorderLayout.NORTH);
+
+        pnlDashboardBody.setBackground(java.awt.Color.white);
+        pnlDashboardBody.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        pnlDashboardBody.setMaximumSize(new java.awt.Dimension(780, 580));
+        pnlDashboardBody.setMinimumSize(new java.awt.Dimension(780, 580));
+        pnlDashboardBody.setPreferredSize(new java.awt.Dimension(780, 580));
+
+        cardIncome.setBackground(new java.awt.Color(212, 246, 219));
+        cardIncome.setForeground(new java.awt.Color(51, 51, 51));
+        cardIncome.setAutoscrolls(true);
+        cardIncome.setMaximumSize(new java.awt.Dimension(370, 270));
+        cardIncome.setMinimumSize(new java.awt.Dimension(370, 270));
+        cardIncome.setPreferredSize(new java.awt.Dimension(370, 270));
+        cardIncome.setLayout(new java.awt.BorderLayout(10, 10));
+        cardIncome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0,0,0,30), 2, true));
+
+        lblIncomeValue.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        lblIncomeValue.setForeground(new java.awt.Color(34, 34, 34));
+        lblIncomeValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIncomeValue.setText("Rp. 0");
+        lblIncomeValue.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cardIncome.add(lblIncomeValue, java.awt.BorderLayout.CENTER);
+
+        lblIncomeTitle.setBackground(new java.awt.Color(0, 5, 85));
+        lblIncomeTitle.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblIncomeTitle.setForeground(new java.awt.Color(51, 51, 51));
+        lblIncomeTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIncomeTitle.setText("Total Pemasukan :");
+        cardIncome.add(lblIncomeTitle, java.awt.BorderLayout.NORTH);
+
+        pnlDashboardBody.add(cardIncome);
+
+        cardExpense.setBackground(new java.awt.Color(248, 215, 218));
+        cardExpense.setForeground(new java.awt.Color(51, 51, 51));
+        cardExpense.setMaximumSize(new java.awt.Dimension(370, 270));
+        cardExpense.setMinimumSize(new java.awt.Dimension(370, 270));
+        cardExpense.setPreferredSize(new java.awt.Dimension(370, 270));
+        cardExpense.setLayout(new java.awt.BorderLayout());
+
+        lblPengeluaranTitle.setBackground(new java.awt.Color(0, 5, 85));
+        lblPengeluaranTitle.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblPengeluaranTitle.setForeground(new java.awt.Color(51, 51, 51));
+        lblPengeluaranTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPengeluaranTitle.setText("Total Pemasukan :");
+        cardExpense.add(lblPengeluaranTitle, java.awt.BorderLayout.NORTH);
+
+        lblPengeluaranValue.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        lblPengeluaranValue.setForeground(new java.awt.Color(34, 34, 34));
+        lblPengeluaranValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPengeluaranValue.setText("Rp. 0");
+        lblPengeluaranValue.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cardExpense.add(lblPengeluaranValue, java.awt.BorderLayout.CENTER);
+
+        pnlDashboardBody.add(cardExpense);
+
+        cardBalance.setBackground(new java.awt.Color(215, 233, 255));
+        cardBalance.setForeground(new java.awt.Color(51, 51, 51));
+        cardBalance.setMaximumSize(new java.awt.Dimension(370, 270));
+        cardBalance.setMinimumSize(new java.awt.Dimension(370, 270));
+        cardBalance.setPreferredSize(new java.awt.Dimension(370, 270));
+        cardBalance.setLayout(new java.awt.BorderLayout());
+
+        lblBalanceTitle.setBackground(new java.awt.Color(0, 5, 85));
+        lblBalanceTitle.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblBalanceTitle.setForeground(new java.awt.Color(51, 51, 51));
+        lblBalanceTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBalanceTitle.setText("Total Pemasukan :");
+        cardBalance.add(lblBalanceTitle, java.awt.BorderLayout.NORTH);
+
+        lblBalanceValue.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        lblBalanceValue.setForeground(new java.awt.Color(34, 34, 34));
+        lblBalanceValue.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBalanceValue.setText("Rp. 0");
+        lblBalanceValue.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cardBalance.add(lblBalanceValue, java.awt.BorderLayout.CENTER);
+
+        pnlDashboardBody.add(cardBalance);
+
+        pnlDashboard.add(pnlDashboardBody, java.awt.BorderLayout.CENTER);
+
+        pnlContent.add(pnlDashboard, "dashboard");
+
+        pnlKeuangan.setMaximumSize(new java.awt.Dimension(780, 640));
+        pnlKeuangan.setMinimumSize(new java.awt.Dimension(780, 640));
+        pnlKeuangan.setPreferredSize(new java.awt.Dimension(780, 640));
+        pnlKeuangan.setLayout(new java.awt.BorderLayout());
+
+        pnlNavbarKeuangan.setBackground(new java.awt.Color(230, 230, 230));
+        pnlNavbarKeuangan.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 1, 1, 1));
+        pnlNavbarKeuangan.setMaximumSize(new java.awt.Dimension(780, 60));
+        pnlNavbarKeuangan.setMinimumSize(new java.awt.Dimension(780, 60));
+        pnlNavbarKeuangan.setPreferredSize(new java.awt.Dimension(780, 60));
+        pnlNavbarKeuangan.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lblKeuanganTitle.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lblKeuanganTitle.setForeground(new java.awt.Color(51, 51, 51));
+        lblKeuanganTitle.setText("Keuangan");
+        pnlNavbarKeuangan.add(lblKeuanganTitle);
+        pnlNavbarKeuangan.add(filler4);
+
+        btnTambahData.setBackground(new java.awt.Color(229, 229, 229));
+        btnTambahData.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnTambahData.setForeground(new java.awt.Color(102, 102, 102));
+        btnTambahData.setText("Tambah Data");
+        btnTambahData.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTambahData.setMaximumSize(new java.awt.Dimension(130, 35));
+        btnTambahData.setMinimumSize(new java.awt.Dimension(130, 35));
+        btnTambahData.setPreferredSize(new java.awt.Dimension(130, 35));
+        btnTambahData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahDataActionPerformed(evt);
+            }
+        });
+        pnlNavbarKeuangan.add(btnTambahData);
+
+        btnRefreshKeuangan.setBackground(new java.awt.Color(229, 229, 229));
+        btnRefreshKeuangan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRefreshKeuangan.setForeground(new java.awt.Color(102, 102, 102));
+        btnRefreshKeuangan.setText("Refresh");
+        btnRefreshKeuangan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefreshKeuangan.setMaximumSize(new java.awt.Dimension(90, 35));
+        btnRefreshKeuangan.setMinimumSize(new java.awt.Dimension(90, 35));
+        btnRefreshKeuangan.setPreferredSize(new java.awt.Dimension(90, 35));
+        btnRefreshKeuangan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshKeuanganActionPerformed(evt);
+            }
+        });
+        pnlNavbarKeuangan.add(btnRefreshKeuangan);
+
+        txtSearchbar.setText("Cari . . .");
+        txtSearchbar.setPreferredSize(new java.awt.Dimension(150, 22));
+        pnlNavbarKeuangan.add(txtSearchbar);
+
+        pnlKeuangan.add(pnlNavbarKeuangan, java.awt.BorderLayout.NORTH);
+
+        pnlKeuanganBody.setBackground(java.awt.Color.white);
+        pnlKeuanganBody.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        pnlKeuanganBody.setMaximumSize(new java.awt.Dimension(800, 650));
+        pnlKeuanganBody.setMinimumSize(new java.awt.Dimension(800, 650));
+        pnlKeuanganBody.setName(""); // NOI18N
+        pnlKeuanganBody.setPreferredSize(new java.awt.Dimension(800, 650));
+        pnlKeuanganBody.setLayout(new java.awt.BorderLayout(0, 5));
+
+        pnlTambahData.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 20, 5, 20));
+        pnlTambahData.setMaximumSize(new java.awt.Dimension(750, 220));
+        pnlTambahData.setMinimumSize(new java.awt.Dimension(750, 220));
+        pnlTambahData.setPreferredSize(new java.awt.Dimension(750, 220));
+        pnlTambahData.setLayout(new java.awt.GridLayout(5, 2, 10, 5));
+
+        lblTanggal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTanggal.setForeground(new java.awt.Color(51, 51, 51));
+        lblTanggal.setText("Tanggal");
+        lblTanggal.setAlignmentY(0.0F);
+        lblTanggal.setPreferredSize(new java.awt.Dimension(75, 20));
+        pnlTambahData.add(lblTanggal);
+
+        dateTanggal.setForeground(new java.awt.Color(51, 51, 51));
+        dateTanggal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pnlTambahData.add(dateTanggal);
+
+        lblJenis.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblJenis.setForeground(new java.awt.Color(51, 51, 51));
+        lblJenis.setText("Jenis");
+        lblJenis.setPreferredSize(new java.awt.Dimension(75, 20));
+        pnlTambahData.add(lblJenis);
+
+        cmbJenis.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbJenis.setForeground(new java.awt.Color(51, 51, 51));
+        cmbJenis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pemasukan", "Pengeluaran" }));
+        pnlTambahData.add(cmbJenis);
+
+        lblKeterangan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblKeterangan.setForeground(new java.awt.Color(51, 51, 51));
+        lblKeterangan.setText("Keterangan ");
+        pnlTambahData.add(lblKeterangan);
+
+        txtKeterangan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtKeterangan.setForeground(new java.awt.Color(51, 51, 51));
+        txtKeterangan.setText(". . . ");
+        pnlTambahData.add(txtKeterangan);
+
+        lblJumlah.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblJumlah.setForeground(new java.awt.Color(51, 51, 51));
+        lblJumlah.setText("Jumlah");
+        lblJumlah.setPreferredSize(new java.awt.Dimension(75, 20));
+        pnlTambahData.add(lblJumlah);
+
+        txtJumlah.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtJumlah.setForeground(new java.awt.Color(51, 51, 51));
+        txtJumlah.setText("Rp. 0");
+        txtJumlah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtJumlahActionPerformed(evt);
+            }
+        });
+        pnlTambahData.add(txtJumlah);
+
+        pnlButtonCRUD.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 1, 1, 1));
+        pnlButtonCRUD.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 0));
+
+        btnSimpan.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSimpan.setForeground(new java.awt.Color(51, 51, 51));
+        btnSimpan.setText("Simpan");
+        pnlButtonCRUD.add(btnSimpan);
+
+        btnEdit.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Yellow"));
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(51, 51, 51));
+        btnEdit.setText("Edit");
+        pnlButtonCRUD.add(btnEdit);
+
+        btnHapus.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Red"));
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnHapus.setForeground(new java.awt.Color(51, 51, 51));
+        btnHapus.setText("Hapus");
+        pnlButtonCRUD.add(btnHapus);
+
+        pnlTambahData.add(pnlButtonCRUD);
+
+        pnlKeuanganBody.add(pnlTambahData, java.awt.BorderLayout.PAGE_START);
+
+        pnlTable.setMaximumSize(new java.awt.Dimension(750, 300));
+        pnlTable.setMinimumSize(new java.awt.Dimension(750, 300));
+        pnlTable.setPreferredSize(new java.awt.Dimension(750, 300));
+        pnlTable.setLayout(new java.awt.BorderLayout());
+
+        scrollpaneTabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        tableTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Tanggal", "Jenis", "Keterangan", "Jumlah"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tableTransaksi.setPreferredSize(new java.awt.Dimension(500, 80));
+        scrollpaneTabel.setViewportView(tableTransaksi);
+
+        pnlTable.add(scrollpaneTabel, java.awt.BorderLayout.CENTER);
+
+        pnlToolbar.setMaximumSize(new java.awt.Dimension(750, 40));
+        pnlToolbar.setMinimumSize(new java.awt.Dimension(750, 40));
+        pnlToolbar.setName(""); // NOI18N
+        pnlToolbar.setPreferredSize(new java.awt.Dimension(750, 40));
+        pnlToolbar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 10));
+
+        btnExport.setText("Export");
+        pnlToolbar.add(btnExport);
+
+        btnImport.setText("Import");
+        pnlToolbar.add(btnImport);
+
+        pnlTable.add(pnlToolbar, java.awt.BorderLayout.PAGE_END);
+
+        pnlKeuanganBody.add(pnlTable, java.awt.BorderLayout.CENTER);
+
+        pnlStatus.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 0, 10));
+        pnlStatus.setMaximumSize(new java.awt.Dimension(750, 40));
+        pnlStatus.setMinimumSize(new java.awt.Dimension(750, 40));
+        pnlStatus.setPreferredSize(new java.awt.Dimension(750, 40));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setText("Wellcome Boy!");
+        pnlStatus.add(jLabel2);
+
+        pnlKeuanganBody.add(pnlStatus, java.awt.BorderLayout.PAGE_END);
+
+        pnlKeuangan.add(pnlKeuanganBody, java.awt.BorderLayout.CENTER);
+
+        pnlContent.add(pnlKeuangan, "keuangan");
+
+        javax.swing.GroupLayout pnlLaporanLayout = new javax.swing.GroupLayout(pnlLaporan);
+        pnlLaporan.setLayout(pnlLaporanLayout);
+        pnlLaporanLayout.setHorizontalGroup(
+            pnlLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        pnlLaporanLayout.setVerticalGroup(
+            pnlLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
         );
+
+        pnlContent.add(pnlLaporan, "laporan");
+
+        getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnKeuanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeuanganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnKeuanganActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainView().setVisible(true);
-            }
-        });
-    }
+    private void btnRefreshDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshDashboardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshDashboardActionPerformed
+
+    private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTambahDataActionPerformed
+
+    private void btnRefreshKeuanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshKeuanganActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefreshKeuanganActionPerformed
+
+    private void txtJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJumlahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJumlahActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDashboard;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnKeluar;
+    private javax.swing.JButton btnKeuangan;
+    private javax.swing.JButton btnLaporan;
+    private javax.swing.JButton btnPengaturan;
+    private javax.swing.JButton btnRefreshDashboard;
+    private javax.swing.JButton btnRefreshKeuangan;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JButton btnTambahData;
+    private javax.swing.JPanel cardBalance;
+    private javax.swing.JPanel cardExpense;
+    private javax.swing.JPanel cardIncome;
+    private javax.swing.JComboBox<String> cmbJenis;
+    private com.toedter.calendar.JDateChooser dateTanggal;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
+    private javax.swing.Box.Filler filler5;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblBalanceTitle;
+    private javax.swing.JLabel lblBalanceValue;
+    private javax.swing.JLabel lblDashboardTitle;
+    private javax.swing.JLabel lblIncomeTitle;
+    private javax.swing.JLabel lblIncomeValue;
+    private javax.swing.JLabel lblJenis;
+    private javax.swing.JLabel lblJumlah;
+    private javax.swing.JLabel lblKeterangan;
+    private javax.swing.JLabel lblKeuanganTitle;
+    private javax.swing.JLabel lblPengeluaranTitle;
+    private javax.swing.JLabel lblPengeluaranValue;
+    private javax.swing.JLabel lblTanggal;
+    private javax.swing.JPanel pnlButtonCRUD;
+    private javax.swing.JPanel pnlContent;
+    private javax.swing.JPanel pnlDashboard;
+    private javax.swing.JPanel pnlDashboardBody;
+    private javax.swing.JPanel pnlKeuangan;
+    private javax.swing.JPanel pnlKeuanganBody;
+    private javax.swing.JPanel pnlLaporan;
+    private javax.swing.JPanel pnlNavbarDashboard;
+    private javax.swing.JPanel pnlNavbarKeuangan;
+    private javax.swing.JPanel pnlSidebar;
+    private javax.swing.JPanel pnlStatus;
+    private javax.swing.JPanel pnlTable;
+    private javax.swing.JPanel pnlTambahData;
+    private javax.swing.JPanel pnlToolbar;
+    private javax.swing.JScrollPane scrollpaneTabel;
+    private javax.swing.JTable tableTransaksi;
+    private javax.swing.JTextField txtJumlah;
+    private javax.swing.JTextField txtKeterangan;
+    private javax.swing.JTextField txtSearchbar;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,57 +1,58 @@
 package connection;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
- * Class Koneksi
- * ---------------------------------------
- * Mengatur koneksi ke database SQLite.
- * File database (keuangan.db) otomatis dibuat jika belum ada.
- * ---------------------------------------
+ * Kelas untuk mengatur koneksi SQLite.
+ * Termasuk auto-create database dan tabel kalau belum ada.
  */
 public class Koneksi {
 
-    // Menyimpan objek koneksi agar tidak dibuat berulang kali
-    private static Connection conn;
+    private static final String DB_URL = "jdbc:sqlite:database_keuangan.db";
 
-    /**
-     * Method untuk mendapatkan koneksi ke database SQLite.
-     * @return objek Connection ke database
-     */
     public static Connection getConnection() {
-        if (conn == null) {
-            try {
-                // Lokasi database (dibuat otomatis di root project)
-                String url = "jdbc:sqlite:keuangan.db";
-
-                // Membuat koneksi
-                conn = DriverManager.getConnection(url);
-
-                // Validasi koneksi
-                if (conn != null) {
-                    System.out.println("✅ Koneksi ke database SQLite berhasil!");
-                }
-
-            } catch (SQLException e) {
-                System.err.println("❌ Gagal membuat koneksi ke database: " + e.getMessage());
-            }
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(DB_URL);
+            createTablesIfNotExists(conn); // Auto bikin tabel
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Gagal konek database: " + e.getMessage(),
+                    "Error DB", JOptionPane.ERROR_MESSAGE);
         }
         return conn;
     }
 
-    // Menutup koneksi database secara aman.
+    /**
+     * Bikin tabel kalau belum ada. Ini aman dipanggil setiap connect.
+     */
+    private static void createTablesIfNotExists(Connection conn) {
+        String createKategori =
+                "CREATE TABLE IF NOT EXISTS kategori (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "nama_kategori TEXT NOT NULL UNIQUE" +
+                        ")";
 
-    public static void closeConnection() {
-        if (conn != null) {
-            try {
-                conn.close();
-                conn = null;
-                System.out.println("🔒 Koneksi database ditutup.");
-            } catch (SQLException e) {
-                System.err.println("⚠️ Gagal menutup koneksi: " + e.getMessage());
-            }
+        String createTransaksi =
+                "CREATE TABLE IF NOT EXISTS transaksi (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "tanggal TEXT NOT NULL," +
+                        "jenis TEXT NOT NULL," +
+                        "keterangan TEXT," +
+                        "jumlah REAL NOT NULL," +
+                        "kategori_id INTEGER NOT NULL," +
+                        "FOREIGN KEY (kategori_id) REFERENCES kategori(id)" +
+                        ")";
+
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute(createKategori);
+            stmt.execute(createTransaksi);
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Gagal bikin tabel: " + e.getMessage(),
+                    "Error DB", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
