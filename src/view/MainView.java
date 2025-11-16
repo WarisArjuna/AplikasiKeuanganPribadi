@@ -166,7 +166,7 @@ public class MainView extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JejakFinan");
+        setTitle("KeuanganKu");
         setFont(new java.awt.Font("Agency FB", 1, 14)); // NOI18N
         setMaximumSize(new java.awt.Dimension(1000, 650));
         setMinimumSize(new java.awt.Dimension(1000, 650));
