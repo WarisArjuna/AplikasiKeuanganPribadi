@@ -1,43 +1,39 @@
 package model;
 
-/**
- * Model untuk data transaksi
- */
 public class Transaksi {
-    private int id;
-    private String tanggal;
-    private String jenis;
+    private Integer id;
+    private String tanggal;      // format yyyy-MM-dd
+    private String jenis;        // "Pemasukan" atau "Pengeluaran"
     private String keterangan;
-    private double jumlah;
-    private int kategoriId;
+    private Double jumlah;
 
-    public Transaksi() {}
+    // === CONSTRUCTOR KOSONG ===
+    public Transaksi() {
+    }
 
-    // ✅ Constructor lengkap (buat SELECT dari database)
-    public Transaksi(int id, String tanggal, String jenis, String keterangan, double jumlah, int kategoriId) {
+    // === CONSTRUCTOR UTAMA (ID) ===
+    public Transaksi(Integer id, String tanggal, String jenis, String keterangan, Double jumlah) {
         this.id = id;
         this.tanggal = tanggal;
         this.jenis = jenis;
         this.keterangan = keterangan;
         this.jumlah = jumlah;
-        this.kategoriId = kategoriId;
     }
 
-    // ✅ Constructor singkat (buat INSERT baru)
-    public Transaksi(String tanggal, String jenis, String keterangan, double jumlah, int kategoriId) {
+    // === CONSTRUCTOR TANPA ID ===
+    public Transaksi(String tanggal, String jenis, String keterangan, Double jumlah) {
         this.tanggal = tanggal;
         this.jenis = jenis;
         this.keterangan = keterangan;
         this.jumlah = jumlah;
-        this.kategoriId = kategoriId;
     }
 
-    // Getter dan Setter
-    public int getId() {
+    // === GETTER & SETTER ===
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,19 +61,23 @@ public class Transaksi {
         this.keterangan = keterangan;
     }
 
-    public double getJumlah() {
+    public Double getJumlah() {
         return jumlah;
     }
 
-    public void setJumlah(double jumlah) {
+    public void setJumlah(Double jumlah) {
         this.jumlah = jumlah;
     }
 
-    public int getKategoriId() {
-        return kategoriId;
-    }
-
-    public void setKategoriId(int kategoriId) {
-        this.kategoriId = kategoriId;
+    // === toString buat debug gampang ===
+    @Override
+    public String toString() {
+        return "Transaksi{" +
+                "id=" + id +
+                ", tanggal='" + tanggal + '\'' +
+                ", jenis='" + jenis + '\'' +
+                ", keterangan='" + keterangan + '\'' +
+                ", jumlah=" + jumlah +
+                '}';
     }
 }

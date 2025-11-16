@@ -1,0 +1,16 @@
+[
+  {
+    "id": 28,
+    "tanggal": "2025-11-04",
+    "jenis": "Pengeluaran",
+    "keterangan": "Makan Nasgor",
+    "jumlah": 100000.0
+  },
+  {
+    "id": 29,
+    "tanggal": "2025-11-02",
+    "jenis": "Pemasukan",
+    "keterangan": "Gaji",
+    "jumlah": 2000000.0
+  }
+]

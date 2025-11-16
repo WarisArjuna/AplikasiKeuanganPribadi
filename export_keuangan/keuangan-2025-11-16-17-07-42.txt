@@ -1,0 +1,12 @@
+ID: 28
+Tanggal: 2025-11-04
+Jenis: Pengeluaran
+Keterangan: Makan Nasgor
+Jumlah: 100000.0
+-----------------------------
+ID: 29
+Tanggal: 2025-11-02
+Jenis: Pemasukan
+Keterangan: Gaji
+Jumlah: 2000000.0
+-----------------------------

@@ -1,23 +1,33 @@
 package view;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialLighterIJTheme;
+import controller.DashboardController;
+import controller.KeuanganController;
 import controller.SidebarController;
+import javax.swing.JOptionPane;
 import util.ButtonStyler;
 import util.ButtonStyler.SidebarColor;
 
 public class MainView extends javax.swing.JFrame {
     SidebarController sidebar;
-
+    
     public MainView() {
         initComponents();
         setLocationRelativeTo(null); 
 
         sidebar = new SidebarController(pnlContent);
+        
+        DashboardController dashboard = new DashboardController(
+            lblIncomeValue,
+            lblPengeluaranValue,
+            lblBalanceValue
+        );
 
+
+        
          // daftarkan menu
         sidebar.addMenu(btnDashboard, "dashboard");
         sidebar.addMenu(btnKeuangan, "keuangan");
-        sidebar.addMenu(btnPengaturan, "pengaturan");
 
         // set default tampilan
         sidebar.setDefault(btnDashboard); 
@@ -50,9 +60,6 @@ public class MainView extends javax.swing.JFrame {
         lblBalanceTitle.putClientProperty("FlatLaf.style", "font: bold +1;");
         lblBalanceValue.putClientProperty("FlatLaf.style", "font: bold +6;");
         
-        btnRefreshDashboard.putClientProperty("FlatLaf.style", "background:#2196F3; foreground:#fff; arc:12;");
-        
-        btnTambahData.putClientProperty("FlatLaf.style", "background:#4CAF50; foreground:#fff; arc:12;");
         btnRefreshKeuangan.putClientProperty("FlatLaf.style", "background:#2196F3; foreground:#fff; arc:12;");
 
         ButtonStyler.stylePrimary(btnSimpan);
@@ -61,8 +68,26 @@ public class MainView extends javax.swing.JFrame {
         
         ButtonStyler.styleSidebar(btnDashboard, SidebarColor.BLUE);
         ButtonStyler.styleSidebar(btnKeuangan, SidebarColor.PURPLE);
-        ButtonStyler.styleSidebar(btnLaporan, SidebarColor.ORANGE);
-        ButtonStyler.styleSidebar(btnPengaturan, SidebarColor.DARK);
+        
+        new KeuanganController(
+                pnlKeuangan,
+                tableTransaksi,
+                dateTanggal,
+                cmbJenis,
+                txtKeterangan,
+                txtJumlah,
+                txtSearch,
+                btnSimpan,
+                btnEdit,
+                btnHapus,
+                btnRefreshKeuangan,
+                btnExport,     
+                btnImport,     
+                lblStatus,
+                dashboard
+        );
+  
+
     };
 
     public class Main {
@@ -93,9 +118,7 @@ public class MainView extends javax.swing.JFrame {
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5));
         btnKeuangan = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5));
-        btnLaporan = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5), new java.awt.Dimension(5, 5));
-        btnPengaturan = new javax.swing.JButton();
         filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         btnKeluar = new javax.swing.JButton();
         pnlContent = new javax.swing.JPanel();
@@ -103,7 +126,6 @@ public class MainView extends javax.swing.JFrame {
         pnlNavbarDashboard = new javax.swing.JPanel();
         lblDashboardTitle = new javax.swing.JLabel();
         filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(550, 20), new java.awt.Dimension(32767, 0));
-        btnRefreshDashboard = new javax.swing.JButton();
         pnlDashboardBody = new javax.swing.JPanel();
         cardIncome = new javax.swing.JPanel();
         lblIncomeValue = new javax.swing.JLabel();
@@ -117,10 +139,9 @@ public class MainView extends javax.swing.JFrame {
         pnlKeuangan = new javax.swing.JPanel();
         pnlNavbarKeuangan = new javax.swing.JPanel();
         lblKeuanganTitle = new javax.swing.JLabel();
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(280, 20), new java.awt.Dimension(32767, 0));
-        btnTambahData = new javax.swing.JButton();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(430, 20), new java.awt.Dimension(32767, 0));
         btnRefreshKeuangan = new javax.swing.JButton();
-        txtSearchbar = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         pnlKeuanganBody = new javax.swing.JPanel();
         pnlTambahData = new javax.swing.JPanel();
         lblTanggal = new javax.swing.JLabel();
@@ -142,8 +163,7 @@ public class MainView extends javax.swing.JFrame {
         btnExport = new javax.swing.JButton();
         btnImport = new javax.swing.JButton();
         pnlStatus = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        pnlLaporan = new javax.swing.JPanel();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JejakFinan");
@@ -177,7 +197,6 @@ public class MainView extends javax.swing.JFrame {
         btnDashboard.setMaximumSize(new java.awt.Dimension(180, 40));
         btnDashboard.setMinimumSize(new java.awt.Dimension(180, 40));
         btnDashboard.setPreferredSize(new java.awt.Dimension(180, 40));
-        btnDashboard.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/icons/dashboard.png"))); // NOI18N
         pnlSidebar.add(btnDashboard);
         pnlSidebar.add(filler5);
 
@@ -198,31 +217,7 @@ public class MainView extends javax.swing.JFrame {
         });
         pnlSidebar.add(btnKeuangan);
         pnlSidebar.add(filler3);
-
-        btnLaporan.setBackground(new java.awt.Color(82, 60, 120));
-        btnLaporan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        btnLaporan.setForeground(java.awt.Color.white);
-        btnLaporan.setText("Laporan");
-        btnLaporan.setBorderPainted(false);
-        btnLaporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLaporan.setFocusPainted(false);
-        btnLaporan.setMaximumSize(new java.awt.Dimension(180, 40));
-        btnLaporan.setMinimumSize(new java.awt.Dimension(180, 40));
-        btnLaporan.setPreferredSize(new java.awt.Dimension(180, 40));
-        pnlSidebar.add(btnLaporan);
         pnlSidebar.add(filler2);
-
-        btnPengaturan.setBackground(new java.awt.Color(97, 97, 97));
-        btnPengaturan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        btnPengaturan.setForeground(java.awt.Color.white);
-        btnPengaturan.setText("Pengaturan");
-        btnPengaturan.setBorderPainted(false);
-        btnPengaturan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPengaturan.setFocusPainted(false);
-        btnPengaturan.setMaximumSize(new java.awt.Dimension(180, 40));
-        btnPengaturan.setMinimumSize(new java.awt.Dimension(180, 40));
-        btnPengaturan.setPreferredSize(new java.awt.Dimension(180, 40));
-        pnlSidebar.add(btnPengaturan);
         pnlSidebar.add(filler6);
 
         btnKeluar.setBackground(new java.awt.Color(198, 40, 40));
@@ -235,6 +230,11 @@ public class MainView extends javax.swing.JFrame {
         btnKeluar.setMaximumSize(new java.awt.Dimension(180, 40));
         btnKeluar.setMinimumSize(new java.awt.Dimension(180, 40));
         btnKeluar.setPreferredSize(new java.awt.Dimension(180, 40));
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
         pnlSidebar.add(btnKeluar);
 
         getContentPane().add(pnlSidebar, java.awt.BorderLayout.WEST);
@@ -260,21 +260,6 @@ public class MainView extends javax.swing.JFrame {
         lblDashboardTitle.setText("Dashboard");
         pnlNavbarDashboard.add(lblDashboardTitle);
         pnlNavbarDashboard.add(filler7);
-
-        btnRefreshDashboard.setBackground(new java.awt.Color(229, 229, 229));
-        btnRefreshDashboard.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRefreshDashboard.setForeground(new java.awt.Color(102, 102, 102));
-        btnRefreshDashboard.setText("Refresh");
-        btnRefreshDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRefreshDashboard.setMaximumSize(new java.awt.Dimension(90, 35));
-        btnRefreshDashboard.setMinimumSize(new java.awt.Dimension(90, 35));
-        btnRefreshDashboard.setPreferredSize(new java.awt.Dimension(90, 35));
-        btnRefreshDashboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshDashboardActionPerformed(evt);
-            }
-        });
-        pnlNavbarDashboard.add(btnRefreshDashboard);
 
         pnlDashboard.add(pnlNavbarDashboard, java.awt.BorderLayout.NORTH);
 
@@ -320,7 +305,7 @@ public class MainView extends javax.swing.JFrame {
         lblPengeluaranTitle.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblPengeluaranTitle.setForeground(new java.awt.Color(51, 51, 51));
         lblPengeluaranTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPengeluaranTitle.setText("Total Pemasukan :");
+        lblPengeluaranTitle.setText("Total Pengeluaran :");
         cardExpense.add(lblPengeluaranTitle, java.awt.BorderLayout.NORTH);
 
         lblPengeluaranValue.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
@@ -343,7 +328,7 @@ public class MainView extends javax.swing.JFrame {
         lblBalanceTitle.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblBalanceTitle.setForeground(new java.awt.Color(51, 51, 51));
         lblBalanceTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBalanceTitle.setText("Total Pemasukan :");
+        lblBalanceTitle.setText("Total Saldo Akhir :");
         cardBalance.add(lblBalanceTitle, java.awt.BorderLayout.NORTH);
 
         lblBalanceValue.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
@@ -377,21 +362,6 @@ public class MainView extends javax.swing.JFrame {
         pnlNavbarKeuangan.add(lblKeuanganTitle);
         pnlNavbarKeuangan.add(filler4);
 
-        btnTambahData.setBackground(new java.awt.Color(229, 229, 229));
-        btnTambahData.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnTambahData.setForeground(new java.awt.Color(102, 102, 102));
-        btnTambahData.setText("Tambah Data");
-        btnTambahData.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTambahData.setMaximumSize(new java.awt.Dimension(130, 35));
-        btnTambahData.setMinimumSize(new java.awt.Dimension(130, 35));
-        btnTambahData.setPreferredSize(new java.awt.Dimension(130, 35));
-        btnTambahData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahDataActionPerformed(evt);
-            }
-        });
-        pnlNavbarKeuangan.add(btnTambahData);
-
         btnRefreshKeuangan.setBackground(new java.awt.Color(229, 229, 229));
         btnRefreshKeuangan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnRefreshKeuangan.setForeground(new java.awt.Color(102, 102, 102));
@@ -407,9 +377,15 @@ public class MainView extends javax.swing.JFrame {
         });
         pnlNavbarKeuangan.add(btnRefreshKeuangan);
 
-        txtSearchbar.setText("Cari . . .");
-        txtSearchbar.setPreferredSize(new java.awt.Dimension(150, 22));
-        pnlNavbarKeuangan.add(txtSearchbar);
+        txtSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtSearch.setText("Cari . . .");
+        txtSearch.setPreferredSize(new java.awt.Dimension(150, 30));
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtSearchMousePressed(evt);
+            }
+        });
+        pnlNavbarKeuangan.add(txtSearch);
 
         pnlKeuangan.add(pnlNavbarKeuangan, java.awt.BorderLayout.NORTH);
 
@@ -482,6 +458,11 @@ public class MainView extends javax.swing.JFrame {
         btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSimpan.setForeground(new java.awt.Color(51, 51, 51));
         btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
         pnlButtonCRUD.add(btnSimpan);
 
         btnEdit.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Yellow"));
@@ -552,28 +533,15 @@ public class MainView extends javax.swing.JFrame {
         pnlStatus.setMinimumSize(new java.awt.Dimension(750, 40));
         pnlStatus.setPreferredSize(new java.awt.Dimension(750, 40));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel2.setText("Wellcome Boy!");
-        pnlStatus.add(jLabel2);
+        lblStatus.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblStatus.setText("Wellcome Boy!");
+        pnlStatus.add(lblStatus);
 
         pnlKeuanganBody.add(pnlStatus, java.awt.BorderLayout.PAGE_END);
 
         pnlKeuangan.add(pnlKeuanganBody, java.awt.BorderLayout.CENTER);
 
         pnlContent.add(pnlKeuangan, "keuangan");
-
-        javax.swing.GroupLayout pnlLaporanLayout = new javax.swing.GroupLayout(pnlLaporan);
-        pnlLaporan.setLayout(pnlLaporanLayout);
-        pnlLaporanLayout.setHorizontalGroup(
-            pnlLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        pnlLaporanLayout.setVerticalGroup(
-            pnlLaporanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
-        );
-
-        pnlContent.add(pnlLaporan, "laporan");
 
         getContentPane().add(pnlContent, java.awt.BorderLayout.CENTER);
 
@@ -584,14 +552,6 @@ public class MainView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnKeuanganActionPerformed
 
-    private void btnRefreshDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshDashboardActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRefreshDashboardActionPerformed
-
-    private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTambahDataActionPerformed
-
     private void btnRefreshKeuanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshKeuanganActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRefreshKeuanganActionPerformed
@@ -599,6 +559,28 @@ public class MainView extends javax.swing.JFrame {
     private void txtJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJumlahActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJumlahActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        int konfirmasi = JOptionPane.showConfirmDialog(
+                null,
+                "Yakin ingin keluar dari aplikasi?",
+                "Konfirmasi Keluar",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (konfirmasi == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void txtSearchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMousePressed
+        txtSearch.setText("");
+    }//GEN-LAST:event_txtSearchMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -609,12 +591,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton btnImport;
     private javax.swing.JButton btnKeluar;
     private javax.swing.JButton btnKeuangan;
-    private javax.swing.JButton btnLaporan;
-    private javax.swing.JButton btnPengaturan;
-    private javax.swing.JButton btnRefreshDashboard;
     private javax.swing.JButton btnRefreshKeuangan;
     private javax.swing.JButton btnSimpan;
-    private javax.swing.JButton btnTambahData;
     private javax.swing.JPanel cardBalance;
     private javax.swing.JPanel cardExpense;
     private javax.swing.JPanel cardIncome;
@@ -628,7 +606,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler6;
     private javax.swing.Box.Filler filler7;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblBalanceTitle;
     private javax.swing.JLabel lblBalanceValue;
     private javax.swing.JLabel lblDashboardTitle;
@@ -640,6 +617,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel lblKeuanganTitle;
     private javax.swing.JLabel lblPengeluaranTitle;
     private javax.swing.JLabel lblPengeluaranValue;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTanggal;
     private javax.swing.JPanel pnlButtonCRUD;
     private javax.swing.JPanel pnlContent;
@@ -647,7 +625,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDashboardBody;
     private javax.swing.JPanel pnlKeuangan;
     private javax.swing.JPanel pnlKeuanganBody;
-    private javax.swing.JPanel pnlLaporan;
     private javax.swing.JPanel pnlNavbarDashboard;
     private javax.swing.JPanel pnlNavbarKeuangan;
     private javax.swing.JPanel pnlSidebar;
@@ -659,6 +636,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTable tableTransaksi;
     private javax.swing.JTextField txtJumlah;
     private javax.swing.JTextField txtKeterangan;
-    private javax.swing.JTextField txtSearchbar;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
