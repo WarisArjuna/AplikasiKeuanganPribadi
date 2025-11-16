@@ -284,7 +284,7 @@ public class KeuanganController {
 
         if (dao.update(t)) {
             setStatus("Berhasil diupdate");
-            resetForm();
+            loadTable();
             // refresh card dashboard
             if (dashboard != null) {
                 dashboard.loadData();

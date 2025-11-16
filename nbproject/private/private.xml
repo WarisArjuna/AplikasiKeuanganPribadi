@@ -4,12 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/view/MainView.java</file>
-            <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/database/Koneksi.java</file>
+            <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/database/TransaksiDAO.java</file>
             <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/model/Transaksi.java</file>
             <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/controller/KeuanganController.java</file>
-            <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/database/TransaksiDAO.java</file>
-            <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/util/ImportUtil.java</file>
-            <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/util/ExportUtil.java</file>
+            <file>file:/C:/Users/Waris%20Arjuna/Documents/NetBeansProjects/AplikasiKeuanganPribadi/src/util/InputValidator.java</file>
         </group>
     </open-files>
 </project-private>
